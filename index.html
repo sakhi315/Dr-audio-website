@@ -47,44 +47,54 @@
             document.getElementById('modal').style.display = 'none';
         });
 
+    // Wait until the page fully loads
+    document.addEventListener("DOMContentLoaded", function() {
         // Get modal and elements
-    const modal = document.getElementById("newsletter-modal");
-    const closeModal = document.querySelector(".close");
-    const navLinks = document.querySelectorAll("nav a");
+        const modal = document.getElementById("newsletter-modal");
+        const closeModal = document.querySelector(".close");
+        const navLinks = document.querySelectorAll("nav a");
+        const newsletterForm = document.getElementById("newsletter-form");
+        const footerNewsletterForm = document.getElementById("footer-newsletter-form");
 
-    // Open modal when any nav link is clicked
-    navLinks.forEach(link => {
-        link.addEventListener("click", function(event) {
-            event.preventDefault(); // Prevent immediate navigation
+        // Function to open modal
+        function openModal(event) {
+            event.preventDefault(); // Prevent navigation
             modal.style.display = "block";
+        }
+
+        // Attach event listener to all nav links
+        navLinks.forEach(link => {
+            link.addEventListener("click", openModal);
+        });
+
+        // Close modal when 'X' is clicked
+        closeModal.addEventListener("click", function() {
+            modal.style.display = "none";
+        });
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+
+        // Handle newsletter modal form submission
+        newsletterForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            let email = document.getElementById("newsletter-email").value;
+            alert("Thank you for subscribing, " + email + "!");
+            modal.style.display = "none"; // Close modal after submitting
+        });
+
+        // Handle footer newsletter form submission
+        footerNewsletterForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            let email = document.getElementById("footer-newsletter-email").value;
+            alert("Thank you for subscribing, " + email + "!");
         });
     });
-
-    // Close modal when 'X' is clicked
-    closeModal.addEventListener("click", function() {
-        modal.style.display = "none";
-    });
-
-    // Close modal when clicking outside of it
-    window.onclick = function(event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    };
-
-    // Handle newsletter form submission (basic validation)
-    document.getElementById("newsletter-form").addEventListener("submit", function(event) {
-        event.preventDefault();
-        let email = document.getElementById("newsletter-email").value;
-        alert("Thank you for subscribing, " + email + "!");
-        modal.style.display = "none"; // Close modal after submitting
-    });
-    // Handle footer newsletter form submission
-document.getElementById("footer-newsletter-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    let email = document.getElementById("footer-newsletter-email").value;
-    alert("Thank you for subscribing, " + email + "!");
-});
+        
     </script>
     
     <div class="container">
