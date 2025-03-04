@@ -79,7 +79,7 @@
 <!-- Newsletter Signup Modal -->
 <div id="newsletter-modal" class="modal">
     <div class="modal-content">
-        <span id="close-modal" class="close">&times;</span>
+        <span id="close-newsletter-modal" class="close">&times;</span> <!-- Updated ID -->
         <h2>Join Our Newsletter</h2>
         <p>Stay updated with our latest podcasts, blogs, and events!</p>
         <form id="newsletter-form">
@@ -116,17 +116,17 @@
         console.log("JavaScript Loaded Successfully!"); // Debugging
 
         const modal = document.getElementById("newsletter-modal");
-        const closeModal = document.getElementById("close-modal");
+        const closeModal = document.getElementById("close-newsletter-modal"); // Fix: Ensure correct "X" button
         const navLinks = document.querySelectorAll("nav a");
         const newsletterForm = document.getElementById("newsletter-form");
         const podcastButton = document.querySelector(".cta-button"); // "Listen to Podcast" button
         let nextPage = "";
 
-if (!modal) {
-    console.error("ERROR: Newsletter modal not found in the document!");
-} else {
-    console.log("Modal Found:", modal);
-}
+        if (!modal) {
+            console.error("ERROR: Newsletter modal not found in the document!");
+        } else {
+            console.log("Modal Found:", modal);
+        }
 
         // ✅ Check if the user has already subscribed
         let hasSubscribed = localStorage.getItem("subscribed");
@@ -147,14 +147,14 @@ if (!modal) {
             }
 
             console.log("Opening Newsletter Modal...");
-modal.style.display = "block";
+            modal.style.display = "block";
 
-// Force visibility check
-if (modal.style.display === "block") {
-    console.log("SUCCESS: Modal is now visible.");
-} else {
-    console.error("ERROR: Modal is still hidden!");
-}
+            // Force visibility check
+            if (modal.style.display === "block") {
+                console.log("SUCCESS: Modal is now visible.");
+            } else {
+                console.error("ERROR: Modal is still hidden!");
+            }
         }
 
         // ✅ Attach event listener to all navigation links (except Home)
@@ -171,7 +171,7 @@ if (modal.style.display === "block") {
             podcastButton.addEventListener("click", openModal);
         }
 
-        // ✅ Ensure "X" button closes the modal properly
+        // ✅ Fix: Ensure "X" button closes the modal properly
         closeModal.addEventListener("click", function () {
             console.log("Closing Modal");
             modal.style.display = "none";
