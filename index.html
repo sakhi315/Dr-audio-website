@@ -82,51 +82,47 @@
             document.getElementById('modal').style.display = 'none';
         });
 
-    // Wait until the page fully loads
-    document.addEventListener("DOMContentLoaded", function() {
-        // Get modal and elements
+    document.addEventListener("DOMContentLoaded", function () {
         const modal = document.getElementById("newsletter-modal");
         const closeModal = document.querySelector(".close");
         const navLinks = document.querySelectorAll("nav a");
         const newsletterForm = document.getElementById("newsletter-form");
-        const footerNewsletterForm = document.getElementById("footer-newsletter-form");
+        let nextPage = ""; // Store the link user clicks
 
-        // Function to open modal
+        // Function to open modal and store clicked link
         function openModal(event) {
-            event.preventDefault(); // Prevent navigation
+            event.preventDefault(); // Prevent immediate navigation
+            nextPage = this.href; // Store the page user wanted to visit
             modal.style.display = "block";
         }
 
-        // Attach event listener to all nav links
+        // Attach click event to all nav links
         navLinks.forEach(link => {
             link.addEventListener("click", openModal);
         });
 
-        // Close modal when 'X' is clicked
-        closeModal.addEventListener("click", function() {
+        // Close modal when clicking 'X' button
+        closeModal.addEventListener("click", function () {
             modal.style.display = "none";
         });
 
         // Close modal when clicking outside of it
-        window.onclick = function(event) {
+        window.addEventListener("click", function (event) {
             if (event.target === modal) {
                 modal.style.display = "none";
             }
-        };
+        });
 
-        // Handle newsletter modal form submission
-        newsletterForm.addEventListener("submit", function(event) {
+        // Handle newsletter form submission & Redirect to the original page
+        newsletterForm.addEventListener("submit", function (event) {
             event.preventDefault();
             let email = document.getElementById("newsletter-email").value;
             alert("Thank you for subscribing, " + email + "!");
-            modal.style.display = "none"; // Close modal after submitting
-        });
 
-        // Handle footer newsletter form submission
-        footerNewsletterForm.addEventListener("submit", function(event) {
-            event.preventDefault();
-            let email = document.getElementById("footer-newsletter-email").value;
-            alert("Thank you for subscribing, " + email + "!");
+            // Redirect user to the page they originally clicked
+            if (nextPage) {
+                window.location.href = nextPage;
+            }
         });
     });
         
