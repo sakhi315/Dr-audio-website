@@ -138,8 +138,15 @@ if (!modal) {
                 return;
             }
 
-            console.log("Opening Newsletter Modal..."); // Debugging
-            modal.style.display = "block";
+            console.log("Opening Newsletter Modal...");
+modal.style.display = "block";
+
+// Force visibility check
+if (modal.style.display === "block") {
+    console.log("SUCCESS: Modal is now visible.");
+} else {
+    console.error("ERROR: Modal is still hidden!");
+}
         }
 
         // ✅ Attach event listener to all navigation links (except Home)
