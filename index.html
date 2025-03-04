@@ -106,10 +106,11 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const modal = document.getElementById("newsletter-modal");
-        const closeModal = document.getElementById("close-modal"); // "X" button
-        const navLinks = document.querySelectorAll("nav a"); // All navigation links
+        const closeModal = document.getElementById("close-modal");
+        const navLinks = document.querySelectorAll("nav a");
         const newsletterForm = document.getElementById("newsletter-form");
-        let nextPage = ""; // Store the page user clicks
+        const podcastButton = document.querySelector(".cta-button"); // "Listen to Podcast" button
+        let nextPage = "";
 
         // Check if the user has already subscribed
         let hasSubscribed = localStorage.getItem("subscribed");
@@ -117,7 +118,7 @@
         // Function to open the modal and store the clicked page link
         function openModal(event) {
             event.preventDefault(); // Prevent immediate navigation
-            nextPage = this.href; // Store the clicked link
+            nextPage = this.href || this.dataset.link; // Store the clicked link
 
             // If the user has already signed up OR is clicking "Home", go directly to the page
             if (hasSubscribed || nextPage.includes("index.html")) {
@@ -135,6 +136,12 @@
                 link.addEventListener("click", openModal);
             }
         });
+
+        // Ensure the "Listen to Podcast" button also triggers the modal
+        if (podcastButton) {
+            podcastButton.dataset.link = "podcast.html"; // Store the podcast link
+            podcastButton.addEventListener("click", openModal);
+        }
 
         // ✅ Ensure "X" button closes the modal properly
         closeModal.addEventListener("click", function () {
