@@ -58,7 +58,7 @@
 <!-- Newsletter Signup Modal -->
 <div id="newsletter-modal" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span>
+        <span id="close-modal" class="close">&times;</span>
         <h2>Join Our Newsletter</h2>
         <p>Stay updated with our latest podcasts, blogs, and events!</p>
         <form id="newsletter-form">
@@ -84,15 +84,26 @@
     
     document.addEventListener("DOMContentLoaded", function () {
         const modal = document.getElementById("newsletter-modal");
-        const closeModal = document.querySelector(".close"); // Get "X" button
+        const closeModal = document.getElementById("close-modal"); // Ensure we get the "X" button
         const navLinks = document.querySelectorAll("nav a");
         const newsletterForm = document.getElementById("newsletter-form");
         let nextPage = ""; // Store the page the user clicks
+
+        // Check if the user already signed up
+        const hasSubscribed = localStorage.getItem("subscribed");
 
         // Function to open the modal and store the clicked page link
         function openModal(event) {
             event.preventDefault(); // Prevent immediate navigation
             nextPage = this.href; // Save the clicked link
+
+            // If the user has already signed up, go directly to the next page
+            if (hasSubscribed) {
+                window.location.href = nextPage;
+                return;
+            }
+
+            // Otherwise, show the modal
             modal.style.display = "block";
         }
 
@@ -101,7 +112,7 @@
             link.addEventListener("click", openModal);
         });
 
-        // ✅ Fix: Ensure "X" button closes the modal
+        // ✅ Fix: Ensure "X" button closes the modal properly
         closeModal.addEventListener("click", function () {
             modal.style.display = "none"; // Hide the modal
         });
@@ -117,6 +128,10 @@
         newsletterForm.addEventListener("submit", function (event) {
             event.preventDefault();
             let email = document.getElementById("newsletter-email").value;
+
+            // Store in localStorage that the user has subscribed
+            localStorage.setItem("subscribed", "true");
+
             alert("Thank you for subscribing, " + email + "!");
 
             // Close modal after submission
