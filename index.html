@@ -105,50 +105,44 @@
 </footer>
 
 <script>
-        document.getElementById('learnMore').addEventListener('click', function() {
-            document.getElementById('modal').style.display = 'block';
-        });
-    
-        document.querySelector('.close').addEventListener('click', function() {
-            document.getElementById('modal').style.display = 'none';
-        });
-    
     document.addEventListener("DOMContentLoaded", function () {
         const modal = document.getElementById("newsletter-modal");
-        const closeModal = document.getElementById("close-modal"); // Ensure we get the "X" button
-        const navLinks = document.querySelectorAll("nav a");
+        const closeModal = document.getElementById("close-modal"); // "X" button
+        const navLinks = document.querySelectorAll("nav a"); // All navigation links
         const newsletterForm = document.getElementById("newsletter-form");
-        let nextPage = ""; // Store the page the user clicks
+        let nextPage = ""; // Store the page user clicks
 
-        // Check if the user already signed up
-        const hasSubscribed = localStorage.getItem("subscribed");
+        // Check if the user has already subscribed
+        let hasSubscribed = localStorage.getItem("subscribed");
 
         // Function to open the modal and store the clicked page link
         function openModal(event) {
             event.preventDefault(); // Prevent immediate navigation
-            nextPage = this.href; // Save the clicked link
+            nextPage = this.href; // Store the clicked link
 
-            // If the user has already signed up, go directly to the next page
-            if (hasSubscribed) {
+            // If the user has already signed up OR is clicking "Home", go directly to the page
+            if (hasSubscribed || nextPage.includes("index.html")) {
                 window.location.href = nextPage;
                 return;
             }
 
-            // Otherwise, show the modal
+            // Otherwise, show the newsletter signup modal
             modal.style.display = "block";
         }
 
-        // Attach event listener to all nav links
+        // Attach event listener to all nav links (except Home)
         navLinks.forEach(link => {
-            link.addEventListener("click", openModal);
+            if (!link.href.includes("index.html")) {
+                link.addEventListener("click", openModal);
+            }
         });
 
-        // ✅ Fix: Ensure "X" button closes the modal properly
+        // ✅ Ensure "X" button closes the modal properly
         closeModal.addEventListener("click", function () {
             modal.style.display = "none"; // Hide the modal
         });
 
-        // ✅ Fix: Ensure clicking outside the modal closes it
+        // ✅ Ensure clicking outside the modal closes it
         window.addEventListener("click", function (event) {
             if (event.target === modal) {
                 modal.style.display = "none";
@@ -162,6 +156,7 @@
 
             // Store in localStorage that the user has subscribed
             localStorage.setItem("subscribed", "true");
+            hasSubscribed = "true"; // Update the variable immediately
 
             alert("Thank you for subscribing, " + email + "!");
 
@@ -173,16 +168,34 @@
                 window.location.href = nextPage;
             }
         });
+
+        // ✅ Ensure the CTA Newsletter Form in the Footer Works
+        const ctaForm = document.getElementById("cta-newsletter-form");
+        if (ctaForm) {
+            ctaForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+                let email = document.getElementById("cta-newsletter-email").value;
+                alert("Thank you for subscribing, " + email + "!");
+            });
+        }
+
+        // ✅ Keep "Learn More" Modal Working
+        const learnMoreBtn = document.getElementById("learnMore");
+        const learnMoreModal = document.getElementById("modal");
+        const learnMoreClose = document.querySelector(".close");
+
+        if (learnMoreBtn && learnMoreModal && learnMoreClose) {
+            learnMoreBtn.addEventListener("click", function() {
+                learnMoreModal.style.display = "block";
+            });
+
+            learnMoreClose.addEventListener("click", function() {
+                learnMoreModal.style.display = "none";
+            });
+        }
     });
+</script>
 
-    // Handle CTA Newsletter Form Submission
-document.getElementById("cta-newsletter-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    let email = document.getElementById("cta-newsletter-email").value;
-    alert("Thank you for subscribing, " + email + "!");
-});
-
-    </script>
 
 </body>
 
