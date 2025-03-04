@@ -105,6 +105,8 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        console.log("JavaScript Loaded Successfully!"); // Debugging
+
         const modal = document.getElementById("newsletter-modal");
         const closeModal = document.getElementById("close-modal");
         const navLinks = document.querySelectorAll("nav a");
@@ -112,18 +114,22 @@
         const podcastButton = document.querySelector(".cta-button"); // "Listen to Podcast" button
         let nextPage = "";
 
-        // Check if the user has already subscribed
-        let hasSubscribed = localStorage.getItem("subscribed");
+        console.log("Modal Found:", modal); // Debugging
 
-        // Function to open the modal and store the clicked page link
+        // ✅ Check if the user has already subscribed
+        let hasSubscribed = localStorage.getItem("subscribed");
+        console.log("Has Subscribed Status:", hasSubscribed); // Debugging
+
+        // ✅ Function to open the modal and store the clicked page link
         function openModal(event) {
-            event.preventDefault(); // Prevent immediate navigation
+            event.preventDefault();
             nextPage = this.href || this.dataset.link; // Store the clicked link
 
             console.log("Clicked Link:", nextPage); // Debugging
 
-            // If the user has already signed up OR is clicking "Home", go directly to the page
+            // ✅ If the user has already signed up OR is clicking "Home", go directly to the page
             if (hasSubscribed === "true" || nextPage.includes("index.html")) {
+                console.log("User already subscribed, navigating to:", nextPage);
                 window.location.href = nextPage;
                 return;
             }
@@ -132,65 +138,56 @@
             modal.style.display = "block";
         }
 
-        // Attach event listener to all navigation links (except Home)
+        // ✅ Attach event listener to all navigation links (except Home)
         navLinks.forEach(link => {
             if (!link.href.includes("index.html")) {
+                console.log("Adding Click Listener to:", link.href);
                 link.addEventListener("click", openModal);
             }
         });
 
-        // Ensure the "Listen to Podcast" button also triggers the modal
+        // ✅ Ensure the "Listen to Podcast" button also triggers the modal
         if (podcastButton) {
-            podcastButton.dataset.link = "podcast.html"; // Store the podcast link
+            podcastButton.dataset.link = "podcast.html";
             podcastButton.addEventListener("click", openModal);
         }
 
-        // Ensure "X" button closes the modal properly
+        // ✅ Ensure "X" button closes the modal properly
         closeModal.addEventListener("click", function () {
+            console.log("Closing Modal");
             modal.style.display = "none";
         });
 
-        // Ensure clicking outside the modal closes it
+        // ✅ Ensure clicking outside the modal closes it
         window.addEventListener("click", function (event) {
             if (event.target === modal) {
+                console.log("Clicked Outside, Closing Modal");
                 modal.style.display = "none";
             }
         });
 
-        // Handle newsletter form submission & redirect
+        // ✅ Handle newsletter form submission & redirect
         newsletterForm.addEventListener("submit", function (event) {
             event.preventDefault();
             let email = document.getElementById("newsletter-email").value;
 
             console.log("User Subscribed:", email); // Debugging
 
-            // Store in localStorage that the user has subscribed
+            // ✅ Store in localStorage that the user has subscribed
             localStorage.setItem("subscribed", "true");
-            hasSubscribed = "true"; // Update the variable immediately
+            hasSubscribed = "true";
 
             alert("Thank you for subscribing, " + email + "!");
 
-            // Close modal after submission
+            // ✅ Close modal after submission
             modal.style.display = "none";
 
-            // Redirect user to the original page
+            // ✅ Redirect user to the original page
             if (nextPage) {
+                console.log("Redirecting to:", nextPage);
                 window.location.href = nextPage;
             }
         });
-
-        // Ensure the CTA Newsletter Form in the Footer Works
-        const ctaForm = document.getElementById("cta-newsletter-form");
-        if (ctaForm) {
-            ctaForm.addEventListener("submit", function(event) {
-                event.preventDefault();
-                let email = document.getElementById("cta-newsletter-email").value;
-                alert("Thank you for subscribing, " + email + "!");
-            });
-        }
-
-        // Debugging: Show stored subscription status
-        console.log("Has Subscribed:", hasSubscribed);
     });
 </script>
 
