@@ -104,6 +104,14 @@
 </footer>
 
 <script>
+        document.getElementById('learnMore').addEventListener('click', function() {
+            document.getElementById('modal').style.display = 'block';
+        });
+    
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('modal').style.display = 'none';
+        });
+    
     document.addEventListener("DOMContentLoaded", function () {
         console.log("JavaScript Loaded Successfully!"); // Debugging
 
