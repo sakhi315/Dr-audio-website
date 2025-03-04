@@ -22,6 +22,32 @@
     <section class="hero">
         <h1>Empowering Kids Through Audio Learning</h1>
     </section>
+
+    <section class="content">
+    <h2>What is Dr. Audio?</h2>
+    <p>Helping teachers and parents support children's learning and motivation through insightful podcasts and engaging discussions.</p>
+    <button id="learnMore">Learn More</button>
+</section>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>About Dr. Audio</h2>
+        <p>Dr. Audio is an initiative aimed at providing parents and teachers with the necessary tools to encourage children’s learning through audio-based resources, interactive discussions, and expert insights.</p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('learnMore').addEventListener('click', function() {
+        document.getElementById('modal').style.display = 'block';
+    });
+
+    document.querySelector('.close').addEventListener('click', function() {
+        document.getElementById('modal').style.display = 'none';
+    });
+</script>
+
     <div class="container">
         <h2>Welcome to Dr. Audio</h2>
         <p>Helping teachers and parents support children's learning and motivation through insightful podcasts and engaging discussions.</p>
