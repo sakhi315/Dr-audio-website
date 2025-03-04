@@ -156,3 +156,8 @@ footer {
     font-size: 2rem;
     cursor: pointer;
 }
+.contact-section {
+    background: var(--background-color);
+    padding: 3rem 0;
+    text-align: center;
+}
