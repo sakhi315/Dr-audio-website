@@ -79,7 +79,7 @@
 <!-- Newsletter Signup Modal -->
 <div id="newsletter-modal" class="modal">
     <div class="modal-content">
-        <span id="close-newsletter-modal" class="close">&times;</span> <!-- Updated ID -->
+        <span id="close-newsletter-modal" class="close">&times;</span>
         <h2>Join Our Newsletter</h2>
         <p>Stay updated with our latest podcasts, blogs, and events!</p>
         <form id="newsletter-form">
@@ -104,42 +104,37 @@
 </footer>
 
 <script>
-        document.getElementById('learnMore').addEventListener('click', function() {
-            document.getElementById('modal').style.display = 'block';
-        });
-    
-        document.querySelector('.close').addEventListener('click', function() {
-            document.getElementById('modal').style.display = 'none';
-        });
-    
     document.addEventListener("DOMContentLoaded", function () {
         console.log("JavaScript Loaded Successfully!"); // Debugging
 
         const modal = document.getElementById("newsletter-modal");
-        const closeModal = document.getElementById("close-newsletter-modal"); // Fix: Ensure correct "X" button
+        const closeModal = document.getElementById("close-newsletter-modal"); // "X" button in newsletter modal
         const navLinks = document.querySelectorAll("nav a");
         const newsletterForm = document.getElementById("newsletter-form");
         const podcastButton = document.querySelector(".cta-button"); // "Listen to Podcast" button
+        const learnMoreModal = document.getElementById("modal");
+        const learnMoreClose = document.querySelector("#modal .close"); // "X" button for Learn More modal
+        const learnMoreButton = document.getElementById("learnMore"); // Learn More button
+
         let nextPage = "";
-
-        if (!modal) {
-            console.error("ERROR: Newsletter modal not found in the document!");
-        } else {
-            console.log("Modal Found:", modal);
-        }
-
-        // ✅ Check if the user has already subscribed
         let hasSubscribed = localStorage.getItem("subscribed");
-        console.log("Has Subscribed Status:", hasSubscribed); // Debugging
 
-        // ✅ Function to open the modal and store the clicked page link
+        /** ✅ Delay Initial Newsletter Popup **/
+        setTimeout(() => {
+            if (!hasSubscribed) {
+                console.log("Opening Newsletter Popup after delay...");
+                modal.style.display = "block";
+            }
+        }, 5000); // Show after 5 seconds
+
+        /** ✅ Function to open the modal and store clicked page link **/
         function openModal(event) {
-            event.preventDefault();
+            event.preventDefault(); // Prevent immediate navigation
             nextPage = this.href || this.dataset.link; // Store the clicked link
 
-            console.log("Clicked Link:", nextPage); // Debugging
+            console.log("Clicked Link:", nextPage);
 
-            // ✅ If the user has already signed up OR is clicking "Home", go directly to the page
+            // ✅ If user already subscribed OR clicking "Home", go directly to page
             if (hasSubscribed === "true" || nextPage.includes("index.html")) {
                 console.log("User already subscribed, navigating to:", nextPage);
                 window.location.href = nextPage;
@@ -148,16 +143,9 @@
 
             console.log("Opening Newsletter Modal...");
             modal.style.display = "block";
-
-            // Force visibility check
-            if (modal.style.display === "block") {
-                console.log("SUCCESS: Modal is now visible.");
-            } else {
-                console.error("ERROR: Modal is still hidden!");
-            }
         }
 
-        // ✅ Attach event listener to all navigation links (except Home)
+        /** ✅ Attach event listener to all navigation links (except Home) **/
         navLinks.forEach(link => {
             if (!link.href.includes("index.html")) {
                 console.log("Adding Click Listener to:", link.href);
@@ -165,19 +153,19 @@
             }
         });
 
-        // ✅ Ensure the "Listen to Podcast" button also triggers the modal
+        /** ✅ Ensure "Listen to Podcast" button triggers the modal **/
         if (podcastButton) {
             podcastButton.dataset.link = "podcast.html";
             podcastButton.addEventListener("click", openModal);
         }
 
-        // ✅ Fix: Ensure "X" button closes the modal properly
+        /** ✅ Ensure "X" button closes the newsletter modal **/
         closeModal.addEventListener("click", function () {
-            console.log("Closing Modal");
+            console.log("Closing Newsletter Modal");
             modal.style.display = "none";
         });
 
-        // ✅ Ensure clicking outside the modal closes it
+        /** ✅ Ensure clicking outside the newsletter modal closes it **/
         window.addEventListener("click", function (event) {
             if (event.target === modal) {
                 console.log("Clicked Outside, Closing Modal");
@@ -185,12 +173,12 @@
             }
         });
 
-        // ✅ Handle newsletter form submission & redirect
+        /** ✅ Handle newsletter form submission & redirect **/
         newsletterForm.addEventListener("submit", function (event) {
             event.preventDefault();
             let email = document.getElementById("newsletter-email").value;
 
-            console.log("User Subscribed:", email); // Debugging
+            console.log("User Subscribed:", email);
 
             // ✅ Store in localStorage that the user has subscribed
             localStorage.setItem("subscribed", "true");
@@ -205,6 +193,24 @@
             if (nextPage) {
                 console.log("Redirecting to:", nextPage);
                 window.location.href = nextPage;
+            }
+        });
+
+        /** ✅ Fix: Ensure Learn More popup only appears when the button is clicked **/
+        learnMoreButton.addEventListener("click", function () {
+            console.log("Opening Learn More Modal...");
+            learnMoreModal.style.display = "block";
+        });
+
+        learnMoreClose.addEventListener("click", function () {
+            console.log("Closing Learn More Modal");
+            learnMoreModal.style.display = "none";
+        });
+
+        window.addEventListener("click", function (event) {
+            if (event.target === learnMoreModal) {
+                console.log("Clicked Outside, Closing Learn More Modal");
+                learnMoreModal.style.display = "none";
             }
         });
     });
