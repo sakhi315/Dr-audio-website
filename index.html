@@ -114,7 +114,11 @@
         const podcastButton = document.querySelector(".cta-button"); // "Listen to Podcast" button
         let nextPage = "";
 
-        console.log("Modal Found:", modal); // Debugging
+if (!modal) {
+    console.error("ERROR: Newsletter modal not found in the document!");
+} else {
+    console.log("Modal Found:", modal);
+}
 
         // ✅ Check if the user has already subscribed
         let hasSubscribed = localStorage.getItem("subscribed");
