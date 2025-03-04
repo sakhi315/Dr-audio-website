@@ -81,45 +81,48 @@
         document.querySelector('.close').addEventListener('click', function() {
             document.getElementById('modal').style.display = 'none';
         });
-
+    
     document.addEventListener("DOMContentLoaded", function () {
         const modal = document.getElementById("newsletter-modal");
-        const closeModal = document.querySelector(".close");
+        const closeModal = document.querySelector(".close"); // Get "X" button
         const navLinks = document.querySelectorAll("nav a");
         const newsletterForm = document.getElementById("newsletter-form");
-        let nextPage = ""; // Store the link user clicks
+        let nextPage = ""; // Store the page the user clicks
 
-        // Function to open modal and store clicked link
+        // Function to open the modal and store the clicked page link
         function openModal(event) {
             event.preventDefault(); // Prevent immediate navigation
-            nextPage = this.href; // Store the page user wanted to visit
+            nextPage = this.href; // Save the clicked link
             modal.style.display = "block";
         }
 
-        // Attach click event to all nav links
+        // Attach event listener to all nav links
         navLinks.forEach(link => {
             link.addEventListener("click", openModal);
         });
 
-        // Close modal when clicking 'X' button
+        // ✅ Fix: Ensure "X" button closes the modal
         closeModal.addEventListener("click", function () {
-            modal.style.display = "none";
+            modal.style.display = "none"; // Hide the modal
         });
 
-        // Close modal when clicking outside of it
+        // ✅ Fix: Ensure clicking outside the modal closes it
         window.addEventListener("click", function (event) {
             if (event.target === modal) {
                 modal.style.display = "none";
             }
         });
 
-        // Handle newsletter form submission & Redirect to the original page
+        // Handle newsletter form submission & redirect
         newsletterForm.addEventListener("submit", function (event) {
             event.preventDefault();
             let email = document.getElementById("newsletter-email").value;
             alert("Thank you for subscribing, " + email + "!");
 
-            // Redirect user to the page they originally clicked
+            // Close modal after submission
+            modal.style.display = "none";
+
+            // Redirect user to the original page
             if (nextPage) {
                 window.location.href = nextPage;
             }
