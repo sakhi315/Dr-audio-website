@@ -120,17 +120,19 @@
             event.preventDefault(); // Prevent immediate navigation
             nextPage = this.href || this.dataset.link; // Store the clicked link
 
+            console.log("Clicked Link:", nextPage); // Debugging
+
             // If the user has already signed up OR is clicking "Home", go directly to the page
-            if (hasSubscribed || nextPage.includes("index.html")) {
+            if (hasSubscribed === "true" || nextPage.includes("index.html")) {
                 window.location.href = nextPage;
                 return;
             }
 
-            // Otherwise, show the newsletter signup modal
+            console.log("Opening Newsletter Modal..."); // Debugging
             modal.style.display = "block";
         }
 
-        // Attach event listener to all nav links (except Home)
+        // Attach event listener to all navigation links (except Home)
         navLinks.forEach(link => {
             if (!link.href.includes("index.html")) {
                 link.addEventListener("click", openModal);
@@ -143,12 +145,12 @@
             podcastButton.addEventListener("click", openModal);
         }
 
-        // ✅ Ensure "X" button closes the modal properly
+        // Ensure "X" button closes the modal properly
         closeModal.addEventListener("click", function () {
-            modal.style.display = "none"; // Hide the modal
+            modal.style.display = "none";
         });
 
-        // ✅ Ensure clicking outside the modal closes it
+        // Ensure clicking outside the modal closes it
         window.addEventListener("click", function (event) {
             if (event.target === modal) {
                 modal.style.display = "none";
@@ -159,6 +161,8 @@
         newsletterForm.addEventListener("submit", function (event) {
             event.preventDefault();
             let email = document.getElementById("newsletter-email").value;
+
+            console.log("User Subscribed:", email); // Debugging
 
             // Store in localStorage that the user has subscribed
             localStorage.setItem("subscribed", "true");
@@ -175,7 +179,7 @@
             }
         });
 
-        // ✅ Ensure the CTA Newsletter Form in the Footer Works
+        // Ensure the CTA Newsletter Form in the Footer Works
         const ctaForm = document.getElementById("cta-newsletter-form");
         if (ctaForm) {
             ctaForm.addEventListener("submit", function(event) {
@@ -185,20 +189,8 @@
             });
         }
 
-        // ✅ Keep "Learn More" Modal Working
-        const learnMoreBtn = document.getElementById("learnMore");
-        const learnMoreModal = document.getElementById("modal");
-        const learnMoreClose = document.querySelector(".close");
-
-        if (learnMoreBtn && learnMoreModal && learnMoreClose) {
-            learnMoreBtn.addEventListener("click", function() {
-                learnMoreModal.style.display = "block";
-            });
-
-            learnMoreClose.addEventListener("click", function() {
-                learnMoreModal.style.display = "none";
-            });
-        }
+        // Debugging: Show stored subscription status
+        console.log("Has Subscribed:", hasSubscribed);
     });
 </script>
 
