@@ -38,7 +38,42 @@
         </div>
     </div>
     
-    <script>
+    <div class="container">
+        <div class="grid">
+            <div class="card">
+                <h3>Podcast</h3>
+                <p>Listen to expert discussions on education and motivation.</p>
+            </div>
+            <div class="card">
+                <h3>Blog</h3>
+                <p>Read insights from parents and teachers.</p>
+            </div>
+            <div class="card">
+                <h3>Live Speakers</h3>
+                <p>Engage with guest educators and specialists.</p>
+            </div>
+        </div>
+    </div>
+
+<!-- Newsletter Signup Modal -->
+<div id="newsletter-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Join Our Newsletter</h2>
+        <p>Stay updated with our latest podcasts, blogs, and events!</p>
+        <form id="newsletter-form">
+            <input type="email" id="newsletter-email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    &copy; 2025 Dr. Audio. All rights reserved.
+</footer>
+
+<script>
         document.getElementById('learnMore').addEventListener('click', function() {
             document.getElementById('modal').style.display = 'block';
         });
@@ -96,41 +131,6 @@
     });
         
     </script>
-    
-    <div class="container">
-        <div class="grid">
-            <div class="card">
-                <h3>Podcast</h3>
-                <p>Listen to expert discussions on education and motivation.</p>
-            </div>
-            <div class="card">
-                <h3>Blog</h3>
-                <p>Read insights from parents and teachers.</p>
-            </div>
-            <div class="card">
-                <h3>Live Speakers</h3>
-                <p>Engage with guest educators and specialists.</p>
-            </div>
-        </div>
-    </div>
-
-<!-- Newsletter Signup Modal -->
-<div id="newsletter-modal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Join Our Newsletter</h2>
-        <p>Stay updated with our latest podcasts, blogs, and events!</p>
-        <form id="newsletter-form">
-            <input type="email" id="newsletter-email" placeholder="Enter your email" required>
-            <button type="submit">Subscribe</button>
-        </form>
-    </div>
-</div>
-
-<!-- Footer -->
-<footer>
-    &copy; 2025 Dr. Audio. All rights reserved.
-</footer>
 
 </body>
 
