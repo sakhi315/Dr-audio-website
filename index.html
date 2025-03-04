@@ -86,13 +86,29 @@
             alert("Thank you for subscribing, " + email + "!");
             modal.style.display = "none"; // Close modal after submitting
         });
-
-        // Handle footer newsletter form submission
-        footerNewsletterForm.addEventListener("submit", function(event) {
-            event.preventDefault();
-            let email = document.getElementById("footer-newsletter-email").value;
-            alert("Thank you for subscribing, " + email + "!");
-        });
+<!-- Newsletter Signup Modal -->
+<div id="newsletter-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Join Our Newsletter</h2>
+        <p>Stay updated with our latest podcasts, blogs, and events!</p>
+        <form id="newsletter-form">
+            <input type="email" id="newsletter-email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </div>
+</div><!-- Newsletter Signup Modal -->
+<div id="newsletter-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Join Our Newsletter</h2>
+        <p>Stay updated with our latest podcasts, blogs, and events!</p>
+        <form id="newsletter-form">
+            <input type="email" id="newsletter-email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </div>
+</div>
     });
         
     </script>
@@ -114,7 +130,7 @@
         </div>
     </div>
 
-    <!-- Newsletter Signup Modal -->
+<!-- Newsletter Signup Modal -->
 <div id="newsletter-modal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
@@ -126,16 +142,6 @@
         </form>
     </div>
 </div>
-
-<!-- Newsletter Signup Section -->
-<section class="newsletter">
-    <h2>Join Our Newsletter</h2>
-    <p>Stay informed with the latest updates from Dr. Audio.</p>
-    <form id="footer-newsletter-form">
-        <input type="email" id="footer-newsletter-email" placeholder="Enter your email" required>
-        <button type="submit">Subscribe</button>
-    </form>
-</section>
 
 <!-- Footer -->
 <footer>
