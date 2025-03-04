@@ -94,7 +94,7 @@
     <p>Subscribe to our newsletter and never miss an episode!</p>
     <form id="cta-newsletter-form">
         <input type="email" id="cta-newsletter-email" placeholder="Enter your email" required>
-        <button type="submit">Subscribe</button>
+        <button type="submit" id="cta-submit">Subscribe</button>
     </form>
 </section>
 
@@ -109,23 +109,26 @@
 
         // Select modal elements
         const newsletterModal = document.getElementById("newsletter-modal");
-        const closeNewsletterModal = document.getElementById("close-newsletter-modal"); // "X" button
+        const closeNewsletterModal = document.getElementById("close-newsletter-modal"); // "X" button for newsletter modal
         const learnMoreModal = document.getElementById("modal");
         const closeLearnMoreModal = learnMoreModal.querySelector(".close"); // "X" button for Learn More modal
         const learnMoreButton = document.getElementById("learnMore"); // "Learn More" button
         const navLinks = document.querySelectorAll("nav a"); // All navigation links
-        const newsletterForm = document.getElementById("newsletter-form"); // Newsletter form
+        const newsletterForm = document.getElementById("newsletter-form"); // Newsletter modal form
+        const ctaNewsletterForm = document.getElementById("cta-newsletter-form"); // Footer newsletter form
         const podcastButton = document.querySelector(".cta-button"); // "Listen to Podcast" button
 
         let nextPage = ""; // Store the clicked page link
         let hasSubscribed = localStorage.getItem("subscribed"); // Check if the user has already subscribed
 
-        /** ✅ Delay Newsletter Popup (Appears After 5 Seconds) **/
+        /** ✅ Fix: Delay Newsletter Popup Correctly (Appears After 5 Seconds) **/
         if (!hasSubscribed) {
             setTimeout(() => {
                 console.log("Opening Newsletter Popup after 5 seconds...");
                 newsletterModal.style.display = "block";
-            }, 5000); // 5-second delay
+            }, 5000);
+        } else {
+            console.log("User already subscribed. Skipping newsletter popup.");
         }
 
         /** ✅ Function to open the newsletter modal when clicking a nav link **/
@@ -174,12 +177,27 @@
             }
         });
 
-        /** ✅ Handle newsletter form submission & redirect **/
+        /** ✅ Fix: Handle Footer Newsletter Form Submission Without Triggering the Homepage Popup **/
+        ctaNewsletterForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            let email = document.getElementById("cta-newsletter-email").value;
+
+            console.log("User Subscribed via Footer:", email);
+
+            // ✅ Store in localStorage that the user has subscribed
+            localStorage.setItem("subscribed", "true");
+
+            alert("Thank you for subscribing, " + email + "!");
+
+            // ✅ No redirect, just a confirmation message
+        });
+
+        /** ✅ Fix: Handle Newsletter Modal Form Submission **/
         newsletterForm.addEventListener("submit", function (event) {
             event.preventDefault();
             let email = document.getElementById("newsletter-email").value;
 
-            console.log("User Subscribed:", email);
+            console.log("User Subscribed via Modal:", email);
 
             // ✅ Store in localStorage that the user has subscribed
             localStorage.setItem("subscribed", "true");
@@ -197,7 +215,7 @@
             }
         });
 
-        /** ✅ Fix: Ensure "Learn More" popup only appears when clicking the button **/
+        /** ✅ Fix: Ensure "Learn More" Popup Only Opens When Clicked **/
         learnMoreButton.addEventListener("click", function () {
             console.log("Opening Learn More Modal...");
             learnMoreModal.style.display = "block";
