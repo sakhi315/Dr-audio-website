@@ -119,25 +119,29 @@
         const podcastButton = document.querySelector(".cta-button"); // "Listen to Podcast" button
 
         let nextPage = ""; // Store the clicked page link
-        let hasSubscribed = localStorage.getItem("subscribed"); // Check if the user has already subscribed
 
-        /** ✅ Ensure Once User Signs Up, They Never See the Newsletter Again **/
+        // ✅ Check if the user has already subscribed
+        let hasSubscribed = localStorage.getItem("subscribed");
+
+        console.log("Current subscription status:", hasSubscribed); // Debugging
+
+        /** ✅ Function to check if subscription exists **/
         function preventPopupIfSubscribed() {
-            if (hasSubscribed === "true") {
-                console.log("User already subscribed. Skipping newsletter popup.");
+            if (localStorage.getItem("subscribed") === "true") {
+                console.log("User already subscribed. Popup will NOT show.");
                 return true;
             }
             return false;
         }
 
-        /** ✅ Fix: Ensure 7-Second Delay Before Showing Newsletter Popup **/
+        /** ✅ Fix: 7-Second Delay Before Showing Newsletter Popup, But Only If Not Subscribed **/
         if (!preventPopupIfSubscribed()) {
             console.log("User has NOT subscribed. Waiting 7 seconds before showing popup...");
             
             setTimeout(() => {
                 console.log("Opening Newsletter Popup NOW (after 7 seconds)");
                 newsletterModal.style.display = "block";
-            }, 7000); // ✅ Force delay of 7 seconds (7000ms)
+            }, 7000); // ✅ 7-second delay before showing popup
         }
 
         /** ✅ Function to open the newsletter modal when clicking a nav link **/
@@ -194,7 +198,6 @@
 
             // ✅ Store in localStorage that the user has subscribed
             localStorage.setItem("subscribed", "true");
-            hasSubscribed = "true";
 
             alert("Thank you for subscribing, " + email + "!");
 
@@ -210,7 +213,6 @@
 
             // ✅ Store in localStorage that the user has subscribed
             localStorage.setItem("subscribed", "true");
-            hasSubscribed = "true";
 
             alert("Thank you for subscribing, " + email + "!");
 
