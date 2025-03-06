@@ -121,12 +121,12 @@
         let nextPage = ""; // Store the clicked page link
         let hasSubscribed = localStorage.getItem("subscribed"); // Check if the user has already subscribed
 
-        /** ✅ Fix: Delay Newsletter Popup Correctly (Appears After 5 Seconds) **/
+        /** ✅ Fix: Delay Newsletter Popup (Appears After 7 Seconds) **/
         if (!hasSubscribed) {
             setTimeout(() => {
-                console.log("Opening Newsletter Popup after 5 seconds...");
+                console.log("Opening Newsletter Popup after 7 seconds...");
                 newsletterModal.style.display = "block";
-            }, 5000);
+            }, 7000); // ✅ 7-second delay before showing the popup
         } else {
             console.log("User already subscribed. Skipping newsletter popup.");
         }
