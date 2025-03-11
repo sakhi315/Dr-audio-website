@@ -522,6 +522,7 @@ form button:hover {
         max-width: 250px; /* Keeps it from being too big */
     }
 }
+
 /* Wrapper for Sections */
 .section-wrapper {
     display: flex;
@@ -550,6 +551,7 @@ form button:hover {
     text-align: center;
 }
 
+/* Image Sizing */
 .section-image img {
     width: 100%;
     max-width: 250px; /* Ensures images aren't too big */
@@ -557,9 +559,9 @@ form button:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Reverse Order for Second Section (What is Dr. Audio?) */
-.reverse {
-    flex-direction: row-reverse;
+/* Fix: Force the Second Image to the Right */
+.right-image {
+    flex-direction: row-reverse; /* This forces the image to be on the right */
 }
 
 /* Mobile Responsive: Stack Image Above Text on Small Screens */
