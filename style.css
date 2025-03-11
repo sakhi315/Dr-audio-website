@@ -554,14 +554,14 @@ form button:hover {
 /* Image Sizing */
 .section-image img {
     width: 100%;
-    max-width: 250px; /* Ensures images aren't too big */
+    max-width: 250px; /* Keeps default image size */
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Make the Second Image Bigger */
-.right-image .section-image img {
-    max-width: 300px; /* ✅ Increases size of the second image */
+/* Make ONLY the Second Image Bigger */
+.section-wrapper.right-image .section-image img {
+    max-width: 320px; /* ✅ Makes the second image bigger */
 }
 
 /* Fix: Force the Second Image to the Right */
