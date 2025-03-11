@@ -552,12 +552,12 @@ form button:hover {
 
 .section-image img {
     width: 100%;
-    max-width: 250px; /* Makes sure images are not too big */
+    max-width: 250px; /* Ensures images aren't too big */
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Reverse Order for Second Section */
+/* Reverse Order for Second Section (What is Dr. Audio?) */
 .reverse {
     flex-direction: row-reverse;
 }
