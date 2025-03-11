@@ -588,3 +588,53 @@ form button:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
+/* Podcast Page Wrapper - Aligns text to left and moves image to far right */
+.podcast-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* ✅ Pushes image to far right */
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 2rem 0;
+}
+
+/* Featured Episodes Section - Stays on Left */
+.podcast-content {
+    flex: 1;
+    text-align: left;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Spotlight Image - Moves to Right */
+.podcast-image {
+    flex: 0.3; /* ✅ Takes up less space, keeps it right */
+    text-align: right; /* ✅ Aligns the image fully to the right */
+}
+
+.podcast-image img {
+    width: 90%; /* ✅ Makes it slightly smaller */
+    max-width: 200px; /* ✅ Adjust image size */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile Responsive: Stack Image Below Text */
+@media (max-width: 900px) {
+    .podcast-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .podcast-image {
+        text-align: center; /* ✅ Centers image on mobile */
+        margin-top: 1.5rem;
+    }
+
+    .podcast-image img {
+        width: 80%;
+        max-width: 200px;
+    }
+}
