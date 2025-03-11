@@ -522,3 +522,59 @@ form button:hover {
         max-width: 250px; /* Keeps it from being too big */
     }
 }
+/* Wrapper for Sections */
+.section-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1100px;
+    margin: 2rem auto;
+    gap: 2rem; /* Spacing between image and text */
+    padding: 2rem 0;
+}
+
+/* Centered Section Content */
+.section-content {
+    flex: 1;
+    text-align: center;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 500px;
+}
+
+/* Image Styling */
+.section-image {
+    flex: 0.5;
+    text-align: center;
+}
+
+.section-image img {
+    width: 100%;
+    max-width: 250px; /* Makes sure images are not too big */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Reverse Order for Second Section */
+.reverse {
+    flex-direction: row-reverse;
+}
+
+/* Mobile Responsive: Stack Image Above Text on Small Screens */
+@media (max-width: 900px) {
+    .section-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .section-image {
+        margin-bottom: 1.5rem;
+    }
+
+    .section-image img {
+        width: 80%;
+        max-width: 250px;
+    }
+}
