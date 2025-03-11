@@ -559,6 +559,11 @@ form button:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
+/* Make the Second Image Bigger */
+.right-image .section-image img {
+    max-width: 300px; /* ✅ Increases size of the second image */
+}
+
 /* Fix: Force the Second Image to the Right */
 .right-image {
     flex-direction: row-reverse; /* This forces the image to be on the right */
