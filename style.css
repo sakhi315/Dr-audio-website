@@ -534,6 +534,11 @@ form button:hover {
     padding: 2rem 0;
 }
 
+/* Force Second Image to the Right */
+.section-wrapper.right-image {
+    flex-direction: row-reverse; /* ✅ Moves the second image to the right */
+}
+
 /* Centered Section Content */
 .section-content {
     flex: 1;
@@ -557,11 +562,6 @@ form button:hover {
     max-width: 250px; /* Ensures images aren't too big */
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-/* Fix: Force the Second Image to the Right */
-.right-image {
-    flex-direction: row-reverse; /* This forces the image to be on the right */
 }
 
 /* Mobile Responsive: Stack Image Above Text on Small Screens */
