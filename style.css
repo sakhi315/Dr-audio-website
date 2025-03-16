@@ -656,9 +656,9 @@ footer {
 
 /* Instagram Icon */
 .instagram-icon {
-    width: 18px; /* ✅ Reduces size */
-    height: 18px;
-    margin-left: 10px;
+    width: 25px; /* ✅ Reduces size */
+    height: 25px;
+    margin-left: 15px;
     transition: transform 0.3s ease-in-out;
 }
 
