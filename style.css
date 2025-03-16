@@ -656,13 +656,13 @@ footer {
 
 /* Instagram Icon */
 .instagram-icon {
-    width: 30px; /* ✅ Adjust size */
-    height: 30px;
+    width: 18px; /* ✅ Reduces size */
+    height: 18px;
     margin-left: 10px;
     transition: transform 0.3s ease-in-out;
 }
 
-/* Hover Effect */
+/* Slight Zoom Effect on Hover */
 .instagram-icon:hover {
-    transform: scale(1.1); /* Slight zoom on hover */
+    transform: scale(1.1);
 }
