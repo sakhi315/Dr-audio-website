@@ -658,13 +658,13 @@ footer {
 .instagram-icon {
     width: 25px; /* ✅ Reduces size */
     height: 25px;
-    margin-left: 15px;
+    margin-left: 10px;
     transition: transform 0.3s ease-in-out;
 }
 
 /* Slight Zoom Effect on Hover */
 .instagram-icon:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 
 /* Wireframe Images - Make Them Smaller */
