@@ -666,3 +666,14 @@ footer {
 .instagram-icon:hover {
     transform: scale(1.1);
 }
+
+/* Wireframe Images - Make Them Smaller */
+.research-images img {
+    width: 100%; /* ✅ Keeps responsiveness */
+    max-width: 400px; /* ✅ Limits image size */
+    height: auto; /* ✅ Keeps aspect ratio */
+    display: block;
+    margin: 20px auto; /* ✅ Centers the images */
+    border-radius: 8px; /* ✅ Optional: Adds rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* ✅ Optional: Adds a soft shadow */
+}
