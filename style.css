@@ -523,16 +523,65 @@ form button:hover {
     }
 }
 
-/* Wrapper for Sections */
+/* Default Layout for Sections */
 .section-wrapper {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between; /* ✅ Ensures proper spacing */
     max-width: 1100px;
     margin: 2rem auto;
-    gap: 2rem; /* Spacing between image and text */
+    gap: 2rem;
     padding: 2rem 0;
 }
+
+/* ✅ Force Second Image to the Right */
+.section-wrapper.right-image {
+    flex-direction: row-reverse !important; /* ✅ Moves the second image to the right */
+}
+
+/* Centered Section Content */
+.section-content {
+    flex: 1;
+    text-align: center;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 500px;
+}
+
+/* Image Wrapper */
+.section-image {
+    flex: 0.5;
+    text-align: right; /* ✅ Ensures image is aligned to the right */
+}
+
+/* Image Sizing */
+.section-image img {
+    width: 100%;
+    max-width: 250px; /* ✅ Ensures images aren’t too big */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile Responsive: Stack Image Below Text on Small Screens */
+@media (max-width: 900px) {
+    .section-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .section-image {
+        margin-bottom: 1.5rem;
+        text-align: center; /* ✅ Centers image on small screens */
+    }
+
+    .section-image img {
+        width: 80%;
+        max-width: 250px;
+    }
+}
+
 
 /* Force Second Image to the Right */
 .section-wrapper.right-image {
