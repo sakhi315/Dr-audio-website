@@ -117,25 +117,426 @@ nav a:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Mobile Friendly */
+@media (max-width: 800px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-image {
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    .hero-image img {
+        width: 90%;
+    }
+}
+
+/* Content Sections */
+.content {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.content h2 {
+    color: var(--secondary-color);
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Blog and Podcast Sections */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.card {
+    background: var(--background-color);
+    padding: 1.5rem;
+    border-left: 5px solid var(--primary-color);
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    color: var(--secondary-color);
+    font-size: 1.5rem;
+}
+
+.card p {
+    margin-top: 0.5rem;
+}
+
+/* Buttons */
+button {
+    background: var(--primary-color);
+    color: white;
+    padding: 10px 15px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: var(--hover-color);
+}
+
+/* Footer */
+footer {
+    background: var(--secondary-color);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    margin: 10% auto;
+    width: 50%;
+    text-align: center;
+}
+
+.close {
+    float: right;
+    font-size: 2rem;
+    cursor: pointer;
+}
+/* Contact Form Styling */
+form {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 5px;
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+form textarea {
+    height: 150px;
+    resize: none;
+}
+
+form button {
+    display: inline-block;
+    width: 100%;
+    background: var(--primary-color);
+    color: white;
+    padding: 12px;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+form button:hover {
+    background: var(--hover-color);
+}
+
+/* Newsletter Modal */
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    margin: 10% auto;
+    width: 40%;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content input {
+    width: 80%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.modal-content button {
+    width: 85%;
+    background: var(--primary-color);
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.modal-content button:hover {
+    background: var(--hover-color);
+}
+
+.close {
+    float: right;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+/* Newsletter Footer */
+.newsletter {
+    background: var(--secondary-color);
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.newsletter h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.newsletter p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.newsletter input {
+    width: 60%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.newsletter button {
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.newsletter button:hover {
+    background: var(--hover-color);
+}
+
+/* About Us Section */
+.about-us {
+    background: var(--background-color);
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-content h2 {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.about-content p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* CTA Newsletter Section */
+.cta-section {
+    background: white;
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.cta-section h2 {
+    font-size: 2rem;
+    color: var(--secondary-color);
+}
+
+.cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.cta-section input {
+    width: 60%;
+    padding: 12px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.cta-section button {
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.cta-section button:hover {
+    background: var(--hover-color);
+}
+
+.modal {
+    display: none; /* ✅ Default hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    max-width: 400px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
 /* About Us & Dr. Audio Sections */
-.section-wrapper {
+.about-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    max-width: 1100px;
+    margin: auto;
+    padding: 2rem;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    gap: 2rem; /* Adds spacing between text and image */
+}
+
+.about-content {
+    flex: 1;
+    padding: 1rem;
+}
+
+.about-content h2 {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    margin-bottom: 0.8rem;
+}
+
+.about-content p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.about-image {
+    flex: 1;
+    text-align: center;
+    max-width: 250px; /* Ensures images aren't too large */
+}
+
+.about-image img {
+    width: 100%;
+    max-width: 250px; /* Makes sure images stay smaller */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive: Stack Image Below Text on Small Screens */
+@media (max-width: 900px) {
+    .about-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-image {
+        max-width: 80%;
+        margin-top: 1.5rem;
+    }
+
+    .about-image img {
+        width: 80%;
+        max-width: 250px; /* Keeps it from being too big */
+    }
+}
+
+/* Default Layout for Sections */
+.section-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* ✅ Ensures proper spacing */
     max-width: 1100px;
     margin: 2rem auto;
     gap: 2rem;
     padding: 2rem 0;
 }
 
-/* Forces image for About Us to the left */
-.section-wrapper.left-image {
-    flex-direction: row;
-}
-
-/* Forces image for What is Dr. Audio to the right */
+/* ✅ Force Second Image to the Right */
 .section-wrapper.right-image {
-    flex-direction: row-reverse;
+    flex-direction: row-reverse !important; /* ✅ Moves the second image to the right */
 }
 
 /* Centered Section Content */
@@ -152,18 +553,18 @@ nav a:hover {
 /* Image Wrapper */
 .section-image {
     flex: 0.5;
-    text-align: center;
+    text-align: right; /* ✅ Ensures image is aligned to the right */
 }
 
 /* Image Sizing */
 .section-image img {
     width: 100%;
-    max-width: 250px;
+    max-width: 250px; /* ✅ Ensures images aren’t too big */
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Mobile Responsive: Stack Image Below Text */
+/* Mobile Responsive: Stack Image Below Text on Small Screens */
 @media (max-width: 900px) {
     .section-wrapper {
         flex-direction: column;
@@ -172,7 +573,7 @@ nav a:hover {
 
     .section-image {
         margin-bottom: 1.5rem;
-        text-align: center;
+        text-align: center; /* ✅ Centers image on small screens */
     }
 
     .section-image img {
@@ -181,6 +582,111 @@ nav a:hover {
     }
 }
 
+
+/* Force Second Image to the Right */
+.section-wrapper.right-image {
+    flex-direction: row-reverse; /* ✅ Moves the second image to the right */
+}
+
+/* Centered Section Content */
+.section-content {
+    flex: 1;
+    text-align: center;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 500px;
+}
+
+/* Image Styling */
+.section-image {
+    flex: 0.5;
+    text-align: center;
+}
+
+/* Image Sizing */
+.section-image img {
+    width: 100%;
+    max-width: 250px; /* Ensures images aren't too big */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile Responsive: Stack Image Above Text on Small Screens */
+@media (max-width: 900px) {
+    .section-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .section-image {
+        margin-bottom: 1.5rem;
+    }
+
+    .section-image img {
+        width: 80%;
+        max-width: 250px;
+    }
+}
+
+.podcast-image img {
+    width: 90%; /* ✅ Makes the image slightly smaller */
+    max-width: 200px; /* ✅ Reduces max width */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Podcast Page Wrapper - Aligns text to left and moves image to far right */
+.podcast-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* ✅ Pushes image to far right */
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 2rem 0;
+}
+
+/* Featured Episodes Section - Stays on Left */
+.podcast-content {
+    flex: 1;
+    text-align: left;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Spotlight Image - Moves to Right */
+.podcast-image {
+    flex: 0.3; /* ✅ Takes up less space, keeps it right */
+    text-align: right; /* ✅ Aligns the image fully to the right */
+}
+
+.podcast-image img {
+    width: 90%; /* ✅ Makes it slightly smaller */
+    max-width: 300px; /* ✅ Adjust image size */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile Responsive: Stack Image Below Text */
+@media (max-width: 900px) {
+    .podcast-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .podcast-image {
+        text-align: center; /* ✅ Centers image on mobile */
+        margin-top: 1.5rem;
+    }
+
+    .podcast-image img {
+        width: 80%;
+        max-width: 200px;
+    }
+}
 /* Footer Styling */
 footer {
     background: var(--secondary-color);
@@ -188,6 +694,7 @@ footer {
     text-align: center;
     padding: 1rem;
     margin-top: 2rem;
+    position: relative;
 }
 
 /* Instagram Link */
@@ -198,7 +705,7 @@ footer {
 
 /* Instagram Icon */
 .instagram-icon {
-    width: 25px;
+    width: 25px; /* ✅ Reduces size */
     height: 25px;
     margin-left: 10px;
     transition: transform 0.3s ease-in-out;
@@ -211,20 +718,20 @@ footer {
 
 /* Wireframe Images - Make Them Smaller */
 .research-images img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
+    width: 100%; /* ✅ Keeps responsiveness */
+    max-width: 400px; /* ✅ Limits image size */
+    height: auto; /* ✅ Keeps aspect ratio */
     display: block;
-    margin: 20px auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    margin: 20px auto; /* ✅ Centers the images */
+    border-radius: 8px; /* ✅ Optional: Adds rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* ✅ Optional: Adds a soft shadow */
 }
 
 /* Resources Section Wrapper */
 .resources-wrapper {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; /* ✅ Text on left, image on right */
     max-width: 1100px;
     margin: 2rem auto;
     gap: 2rem;
@@ -239,15 +746,15 @@ footer {
 /* Image on Right */
 .resources-image {
     flex: 0.5;
-    text-align: right;
+    text-align: right; /* ✅ Aligns image to right */
 }
 
 /* Small Image Styling */
 .resources-image img {
     width: 100%;
-    max-width: 200px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    max-width: 200px; /* ✅ Keeps image small */
+    border-radius: 8px; /* ✅ Optional: Rounded edges */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* ✅ Optional: Adds soft shadow */
 }
 
 /* Mobile Responsive: Stack Image Below Text */
@@ -266,8 +773,5 @@ footer {
         width: 80%;
         max-width: 250px;
     }
-    /* Adjust Image Positioning on Right */
-
 }
-
 
