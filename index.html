@@ -122,149 +122,137 @@
 
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        console.log("JavaScript Loaded Successfully!"); // Debugging
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("JavaScript Loaded Successfully!");
 
-        // Select modal elements
-        const newsletterModal = document.getElementById("newsletter-modal");
-        const closeNewsletterModal = document.getElementById("close-newsletter-modal"); // "X" button for newsletter modal
-        const learnMoreModal = document.getElementById("modal");
-        const closeLearnMoreModal = learnMoreModal.querySelector(".close"); // "X" button for Learn More modal
-        const learnMoreButton = document.getElementById("learnMore"); // "Learn More" button
-        const navLinks = document.querySelectorAll("nav a"); // All navigation links
-        const newsletterForm = document.getElementById("newsletter-form"); // Newsletter modal form
-        const ctaNewsletterForm = document.getElementById("cta-newsletter-form"); // Footer newsletter form
-        const podcastButton = document.querySelector(".cta-button"); // "Listen to Podcast" button
-
-        let nextPage = ""; // Store the clicked page link
-
-        // ✅ Check if the user has already subscribed
-        let hasSubscribed = localStorage.getItem("subscribed");
-
-        console.log("Current subscription status:", hasSubscribed); // Debugging
-
-        /** ✅ Function to check if subscription exists **/
-        function preventPopupIfSubscribed() {
-            if (localStorage.getItem("subscribed") === "true") {
-                console.log("User already subscribed. Popup will NOT show.");
-                return true;
-            }
-            return false;
-        }
-
-        /** ✅ Prevent Popup from Showing Again on Homepage Once Subscribed **/
-if (!localStorage.getItem("subscribed")) {
-    console.log("User has NOT subscribed. Waiting 7 seconds before showing popup...");
+    // Select modal elements
+    const newsletterModal = document.getElementById("newsletter-modal");
+    const closeNewsletterModal = document.getElementById("close-newsletter-modal");
+    const learnMoreModal = document.getElementById("modal");
+    const closeLearnMoreModal = learnMoreModal.querySelector(".close");
+    const learnMoreButton = document.getElementById("learnMore");
+    const navLinks = document.querySelectorAll("nav a");
+    const newsletterForm = document.getElementById("newsletter-form");
+    const ctaNewsletterForm = document.getElementById("cta-newsletter-form");
+    const podcastButton = document.querySelector(".cta-button");
     
-    setTimeout(() => {
-        console.log("Opening Newsletter Popup NOW (after 7 seconds)");
+    let nextPage = ""; // Stores the clicked link
+
+    // ✅ Check if the user has already subscribed
+    function hasSubscribed() {
+        return localStorage.getItem("subscribed") === "true";
+    }
+
+    // ✅ Function to force the newsletter popup until they subscribe
+    function forceNewsletterPopup(event) {
+        event.preventDefault(); // Prevent page navigation
+        nextPage = this.href; // Store clicked page link
+
+        console.log("Clicked Link:", nextPage);
+
+        // ✅ If subscribed, allow normal navigation
+        if (hasSubscribed()) {
+            console.log("User already subscribed. Navigating to:", nextPage);
+            window.location.href = nextPage;
+            return;
+        }
+
+        console.log("Opening Newsletter Modal...");
         newsletterModal.style.display = "block";
-    }, 7000);
-} else {
-    console.log("User already subscribed. Popup will NOT show again.");
-}
+    }
 
-        /** ✅ Function to open the newsletter modal when clicking a nav link **/
-        function openNewsletterModal(event) {
-            event.preventDefault(); // Prevent immediate navigation
-            nextPage = this.href || this.dataset.link; // Store the clicked page
-
-            console.log("Clicked Link:", nextPage);
-
-            // ✅ If the user already subscribed, go directly to the page
-            if (preventPopupIfSubscribed()) {
-                window.location.href = nextPage;
-                return;
-            }
-
-            console.log("Opening Newsletter Modal...");
-            newsletterModal.style.display = "block";
+    // ✅ Attach event listeners to all navigation links
+    navLinks.forEach(link => {
+        if (!link.href.includes("index.html")) {
+            console.log("Adding Click Listener to:", link.href);
+            link.addEventListener("click", forceNewsletterPopup);
         }
-
-        /** ✅ Attach event listener to all navigation links **/
-        navLinks.forEach(link => {
-            if (!link.href.includes("index.html")) {
-                console.log("Adding Click Listener to:", link.href);
-                link.addEventListener("click", openNewsletterModal);
-            }
-        });
-
-        /** ✅ Ensure "Listen to Podcast" button triggers the modal **/
-        if (podcastButton) {
-            podcastButton.dataset.link = "podcast.html";
-            podcastButton.addEventListener("click", openNewsletterModal);
-        }
-
-        /** ✅ Ensure "X" button closes the newsletter modal **/
-        closeNewsletterModal.addEventListener("click", function () {
-            console.log("Closing Newsletter Modal");
-            newsletterModal.style.display = "none";
-        });
-
-        /** ✅ Ensure clicking outside the newsletter modal closes it **/
-        window.addEventListener("click", function (event) {
-            if (event.target === newsletterModal) {
-                console.log("Clicked Outside, Closing Newsletter Modal");
-                newsletterModal.style.display = "none";
-            }
-        });
-
-        /** ✅ Fix: Handle Footer Newsletter Form Submission Without Triggering the Homepage Popup **/
-        ctaNewsletterForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-            let email = document.getElementById("cta-newsletter-email").value;
-
-            console.log("User Subscribed via Footer:", email);
-
-            // ✅ Store in localStorage that the user has subscribed
-            localStorage.setItem("subscribed", "true");
-
-            alert("Thank you for subscribing, " + email + "!");
-
-            // ✅ No redirect, just a confirmation message
-        });
-
-        /** ✅ Fix: Handle Newsletter Modal Form Submission **/
-        newsletterForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-            let email = document.getElementById("newsletter-email").value;
-
-            console.log("User Subscribed via Modal:", email);
-
-            // ✅ Store in localStorage that the user has subscribed
-            localStorage.setItem("subscribed", "true");
-
-            alert("Thank you for subscribing, " + email + "!");
-
-            // ✅ Close modal after submission
-            newsletterModal.style.display = "none";
-
-            // ✅ Redirect user to the original page
-            if (nextPage) {
-                console.log("Redirecting to:", nextPage);
-                window.location.href = nextPage;
-            }
-        });
-
-        /** ✅ Fix: Ensure "Learn More" Popup Only Opens When Clicked **/
-        learnMoreButton.addEventListener("click", function () {
-            console.log("Opening Learn More Modal...");
-            learnMoreModal.style.display = "block";
-        });
-
-        closeLearnMoreModal.addEventListener("click", function () {
-            console.log("Closing Learn More Modal");
-            learnMoreModal.style.display = "none";
-        });
-
-        window.addEventListener("click", function (event) {
-            if (event.target === learnMoreModal) {
-                console.log("Clicked Outside, Closing Learn More Modal");
-                learnMoreModal.style.display = "none";
-            }
-        });
     });
+
+    // ✅ Ensure "Listen to Podcast" button triggers the modal
+    if (podcastButton) {
+        podcastButton.dataset.link = "podcast.html";
+        podcastButton.addEventListener("click", forceNewsletterPopup);
+    }
+
+    // ✅ Ensure "X" button closes the modal
+    closeNewsletterModal.addEventListener("click", function () {
+        console.log("Closing Newsletter Modal");
+        newsletterModal.style.display = "none";
+    });
+
+    // ✅ Ensure clicking outside the modal closes it
+    window.addEventListener("click", function (event) {
+        if (event.target === newsletterModal) {
+            console.log("Clicked Outside, Closing Newsletter Modal");
+            newsletterModal.style.display = "none";
+        }
+    });
+
+    // ✅ Handle Newsletter Signup (Popup Form)
+    newsletterForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        let email = document.getElementById("newsletter-email").value;
+
+        console.log("User Subscribed via Modal:", email);
+
+        // ✅ Save subscription status
+        localStorage.setItem("subscribed", "true");
+
+        alert("Thank you for subscribing, " + email + "!");
+
+        // ✅ Close modal and redirect user to clicked page
+        newsletterModal.style.display = "none";
+        if (nextPage) {
+            console.log("Redirecting to:", nextPage);
+            window.location.href = nextPage;
+        }
+    });
+
+    // ✅ Handle Newsletter Signup (Footer Form)
+    ctaNewsletterForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        let email = document.getElementById("cta-newsletter-email").value;
+
+        console.log("User Subscribed via Footer:", email);
+
+        // ✅ Save subscription status
+        localStorage.setItem("subscribed", "true");
+
+        alert("Thank you for subscribing, " + email + "!");
+    });
+
+    // ✅ Fix: Show newsletter popup on homepage after 7 seconds (only if not subscribed)
+    if (!hasSubscribed()) {
+        console.log("User has NOT subscribed. Showing popup in 7 seconds...");
+        setTimeout(() => {
+            console.log("Opening Newsletter Popup NOW");
+            newsletterModal.style.display = "block";
+        }, 7000);
+    } else {
+        console.log("User already subscribed. Popup will NOT show again.");
+    }
+
+    // ✅ Handle Learn More Popup (Only Opens When Clicked)
+    learnMoreButton.addEventListener("click", function () {
+        console.log("Opening Learn More Modal...");
+        learnMoreModal.style.display = "block";
+    });
+
+    closeLearnMoreModal.addEventListener("click", function () {
+        console.log("Closing Learn More Modal");
+        learnMoreModal.style.display = "none";
+    });
+
+    window.addEventListener("click", function (event) {
+        if (event.target === learnMoreModal) {
+            console.log("Clicked Outside, Closing Learn More Modal");
+            learnMoreModal.style.display = "none";
+        }
+    });
+});
 </script>
+
 
 
 </body>
