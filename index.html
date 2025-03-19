@@ -135,8 +135,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const newsletterForm = document.getElementById("newsletter-form");
     const ctaNewsletterForm = document.getElementById("cta-newsletter-form");
     const podcastButton = document.querySelector(".cta-button");
-    
-    let nextPage = ""; // Stores the clicked link
+
+    let nextPage = ""; // Stores the clicked page link
 
     // ✅ Check if the user has already subscribed
     function hasSubscribed() {
@@ -163,10 +163,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ✅ Attach event listeners to all navigation links
     navLinks.forEach(link => {
-        if (!link.href.includes("index.html")) {
-            console.log("Adding Click Listener to:", link.href);
-            link.addEventListener("click", forceNewsletterPopup);
-        }
+        console.log("Adding Click Listener to:", link.href);
+        link.addEventListener("click", forceNewsletterPopup);
     });
 
     // ✅ Ensure "Listen to Podcast" button triggers the modal
@@ -252,6 +250,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+
 
 
 
