@@ -153,15 +153,17 @@
             return false;
         }
 
-        /** ✅ Fix: 7-Second Delay Before Showing Newsletter Popup, But Only If Not Subscribed **/
-        if (!preventPopupIfSubscribed()) {
-            console.log("User has NOT subscribed. Waiting 7 seconds before showing popup...");
-            
-            setTimeout(() => {
-                console.log("Opening Newsletter Popup NOW (after 7 seconds)");
-                newsletterModal.style.display = "block";
-            }, 7000); // ✅ 7-second delay before showing popup
-        }
+        /** ✅ Prevent Popup from Showing Again on Homepage Once Subscribed **/
+if (!localStorage.getItem("subscribed")) {
+    console.log("User has NOT subscribed. Waiting 7 seconds before showing popup...");
+    
+    setTimeout(() => {
+        console.log("Opening Newsletter Popup NOW (after 7 seconds)");
+        newsletterModal.style.display = "block";
+    }, 7000);
+} else {
+    console.log("User already subscribed. Popup will NOT show again.");
+}
 
         /** ✅ Function to open the newsletter modal when clicking a nav link **/
         function openNewsletterModal(event) {
