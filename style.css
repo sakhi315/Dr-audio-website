@@ -775,3 +775,23 @@ footer {
     }
 }
 
+/* Make entire card clickable */
+.card-link {
+    text-decoration: none; /* ✅ Removes underline from link */
+    color: inherit; /* ✅ Keeps text color the same */
+    display: block; /* ✅ Makes the entire card clickable */
+}
+
+/* Ensure card hover effect remains */
+.card {
+    background: var(--background-color);
+    padding: 1.5rem;
+    border-left: 5px solid var(--primary-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+}
+
+.card:hover {
+    transform: scale(1.05); /* ✅ Slight zoom effect on hover */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
