@@ -78,13 +78,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 }
 
-    // ✅ Ensure clicking outside the modal closes it
     window.addEventListener("click", function (event) {
-        if (event.target === newsletterModal) {
-            console.log("Clicked Outside, Closing Newsletter Modal");
-            newsletterModal.style.display = "none";
-        }
-    });
+    if (newsletterModal && event.target === newsletterModal) {
+        console.log("Clicked Outside, Closing Newsletter Modal");
+        event.stopPropagation(); // Ensures it only triggers once
+        newsletterModal.style.display = "none";
+    }
+});
 
     // ✅ Handle Newsletter Signup (Popup Form)
     if (newsletterForm) {
