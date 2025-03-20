@@ -26,13 +26,21 @@ document.addEventListener("DOMContentLoaded", function () {
         return localStorage.getItem("aboutPopupClosed") === "true";
     }
 
-    // ✅ Ensure both pop-ups never show again after signing up
+    // ✅ Function to permanently stop all pop-ups after signing up
     function stopAllPopups() {
-        localStorage.setItem("subscribed", "true"); // Stops newsletter pop-up
-        localStorage.setItem("aboutPopupClosed", "true"); // Stops About Dr. Audio pop-up
+        console.log("Stopping all pop-ups permanently.");
+        localStorage.setItem("subscribed", "true"); // Stop newsletter pop-up
+        localStorage.setItem("aboutPopupClosed", "true"); // Stop "About Dr. Audio" pop-up
     }
 
-    // ✅ Function to force the newsletter popup until they subscribe
+    // ✅ Ensure both pop-ups never show again after signing up
+    if (hasSubscribed()) {
+        console.log("User already subscribed. Hiding all pop-ups.");
+        if (newsletterModal) newsletterModal.style.display = "none";
+        if (learnMoreModal) learnMoreModal.style.display = "none";
+    }
+
+    // ✅ Function to show the newsletter pop-up until they subscribe
     function forceNewsletterPopup(event) {
         event.preventDefault(); // Prevent page navigation
         nextPage = this.href; // Store clicked page link
@@ -63,10 +71,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // ✅ Ensure "X" button closes the newsletter modal
-    closeNewsletterModal.addEventListener("click", function () {
-        console.log("Closing Newsletter Modal");
-        newsletterModal.style.display = "none";
-    });
+    if (closeNewsletterModal) {
+        closeNewsletterModal.addEventListener("click", function () {
+            console.log("Closing Newsletter Modal");
+            newsletterModal.style.display = "none";
+        });
+    }
 
     // ✅ Ensure clicking outside the modal closes it
     window.addEventListener("click", function (event) {
@@ -77,24 +87,26 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // ✅ Handle Newsletter Signup (Popup Form)
-    newsletterForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        let email = document.getElementById("newsletter-email").value;
+    if (newsletterForm) {
+        newsletterForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            let email = document.getElementById("newsletter-email").value;
 
-        console.log("User Subscribed via Modal:", email);
+            console.log("User Subscribed via Modal:", email);
 
-        // ✅ Stop both pop-ups from appearing ever again
-        stopAllPopups();
+            // ✅ Stop both pop-ups from appearing ever again
+            stopAllPopups();
 
-        alert("Thank you for subscribing, " + email + "!");
+            alert("Thank you for subscribing, " + email + "!");
 
-        // ✅ Close modal and redirect user to clicked page
-        newsletterModal.style.display = "none";
-        if (nextPage) {
-            console.log("Redirecting to:", nextPage);
-            window.location.href = nextPage;
-        }
-    });
+            // ✅ Close modal and redirect user to clicked page
+            newsletterModal.style.display = "none";
+            if (nextPage) {
+                console.log("Redirecting to:", nextPage);
+                window.location.href = nextPage;
+            }
+        });
+    }
 
     // ✅ Handle Newsletter Signup (Footer Form)
     if (ctaNewsletterForm) {
@@ -159,6 +171,7 @@ document.addEventListener("DOMContentLoaded", function () {
         learnMoreModal.style.display = "none";
     }
 });
+
 
 
 
