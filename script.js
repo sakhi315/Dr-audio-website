@@ -70,13 +70,13 @@ document.addEventListener("DOMContentLoaded", function () {
         podcastButton.addEventListener("click", forceNewsletterPopup);
     }
 
-    // ✅ Ensure "X" button closes the newsletter modal
     if (closeNewsletterModal) {
-        closeNewsletterModal.addEventListener("click", function () {
-            console.log("Closing Newsletter Modal");
-            newsletterModal.style.display = "none";
-        });
-    }
+    closeNewsletterModal.addEventListener("click", function (event) {
+        console.log("Closing Newsletter Modal");
+        event.stopPropagation(); // Ensures no conflicts
+        newsletterModal.style.display = "none";
+    });
+}
 
     // ✅ Ensure clicking outside the modal closes it
     window.addEventListener("click", function (event) {
