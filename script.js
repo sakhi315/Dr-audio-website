@@ -125,15 +125,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // ✅ Ensure "X" button closes the "About Dr. Audio" modal
-    if (closeLearnMoreModal) {
-        closeLearnMoreModal.addEventListener("click", function () {
-            console.log("Closing Learn More Modal");
-            learnMoreModal.style.display = "none";
+if (closeLearnMoreModal) {
+    closeLearnMoreModal.addEventListener("click", function (event) {
+        console.log("Closing Learn More Modal");
+        learnMoreModal.style.display = "none";
+        event.stopPropagation(); // ✅ Prevents any conflicts
 
-            // ✅ Save in localStorage so it won't appear again after closing
-            localStorage.setItem("aboutPopupClosed", "true");
-        });
+        // ✅ Save in localStorage so it won't appear again
+        localStorage.setItem("aboutPopupClosed", "true");
+    });
+}
+
+// ✅ Ensure clicking outside the modal closes it
+window.addEventListener("click", function (event) {
+    if (event.target === learnMoreModal) {
+        console.log("Clicked Outside, Closing Learn More Modal");
+        learnMoreModal.style.display = "none";
+
+        // ✅ Save in localStorage so it won't appear again
+        localStorage.setItem("aboutPopupClosed", "true");
     }
+});
+
 
     // ✅ Ensure clicking outside the "About Dr. Audio" modal closes it
     window.addEventListener("click", function (event) {
