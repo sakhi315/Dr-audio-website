@@ -170,37 +170,5 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("User has seen About Dr. Audio popup OR is subscribed. Hiding it.");
         learnMoreModal.style.display = "none";
     }
-
-    // ✅ Blog Post Submission Confirmation
-document.addEventListener("DOMContentLoaded", function () {
-    const blogForm = document.getElementById("blog-form");
-    const blogSubmissionMessage = document.getElementById("blog-submission-message");
-
-    if (blogForm) {
-        blogForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-
-            // Get user input
-            let title = document.getElementById("blog-title").value;
-            let author = document.getElementById("blog-author").value;
-            let content = document.getElementById("blog-content").value;
-
-            console.log("New Blog Post Submitted:");
-            console.log("Title:", title);
-            console.log("Author:", author);
-            console.log("Content:", content);
-
-            // Show confirmation message
-            blogSubmissionMessage.style.display = "block";
-
-            // Clear the form fields after submission
-            blogForm.reset();
-
-            // Hide the message after 5 seconds
-            setTimeout(() => {
-                blogSubmissionMessage.style.display = "none";
-            }, 5000);
-        });
-    }
 });
 
