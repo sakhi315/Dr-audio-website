@@ -11,9 +11,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let nextPage = ""; // Stores the clicked page link
 
-    // ✅ Check if the user has already subscribed
+    // ✅ Function to check if the user has subscribed
     function hasSubscribed() {
         return localStorage.getItem("subscribed") === "true";
+    }
+
+    // ✅ If the user is subscribed, HIDE the modal immediately and prevent it from showing again
+    if (hasSubscribed()) {
+        console.log("User already subscribed. Popup will NEVER show again.");
+        if (newsletterModal) newsletterModal.style.display = "none"; // Make sure modal never appears
+        return;
     }
 
     // ✅ Function to force the newsletter popup until they subscribe
@@ -96,13 +103,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // ✅ Show newsletter popup on ALL pages after 7 seconds (only if not subscribed)
-    if (!hasSubscribed()) {
-        console.log("User has NOT subscribed. Showing popup in 7 seconds...");
-        setTimeout(() => {
-            console.log("Opening Newsletter Popup NOW");
+    setTimeout(() => {
+        if (!hasSubscribed()) {
+            console.log("User has NOT subscribed. Showing popup now.");
             newsletterModal.style.display = "block";
-        }, 7000);
-    } else {
-        console.log("User already subscribed. Popup will NOT show again.");
-    }
+        }
+    }, 7000);
 });
+
