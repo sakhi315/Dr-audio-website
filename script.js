@@ -16,31 +16,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let nextPage = ""; // Stores the clicked page link
 
-    // ✅ Check if the user has already subscribed
+    // ✅ Function to check if user has subscribed
     function hasSubscribed() {
         return localStorage.getItem("subscribed") === "true";
     }
 
-    // ✅ Check if the user has already seen the "About Dr. Audio" pop-up
-    function hasSeenAboutPopup() {
-        return localStorage.getItem("aboutPopupClosed") === "true";
+    // ✅ Function to ensure modal only shows when it should
+    function showNewsletterModal() {
+        if (!hasSubscribed()) {
+            console.log("⏳ Showing Newsletter Popup in 7 seconds...");
+            setTimeout(() => {
+                if (!hasSubscribed()) {
+                    console.log("📢 Opening Newsletter Popup NOW");
+                    newsletterModal.style.display = "flex";
+                }
+            }, 7000);
+        }
     }
 
-    // ✅ Function to permanently stop all pop-ups after signing up
-    function stopAllPopups() {
-        console.log("✅ Stopping all pop-ups permanently.");
-        localStorage.setItem("subscribed", "true"); // Stop newsletter pop-up
-        localStorage.setItem("aboutPopupClosed", "true"); // Stop "About Dr. Audio" pop-up
-    }
-
-    // ✅ Ensure pop-ups never show again after signing up
-    if (hasSubscribed()) {
-        console.log("✅ User already subscribed. Hiding all pop-ups.");
-        if (newsletterModal) newsletterModal.style.display = "none";
-        if (learnMoreModal) learnMoreModal.style.display = "none";
-    }
-
-    // ✅ Function to force the newsletter popup until they subscribe
+    // ✅ Function to handle navigation clicks
     function forceNewsletterPopup(event) {
         event.preventDefault(); // Prevent page navigation
         nextPage = this.href; // Store clicked page link
@@ -55,7 +49,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         console.log("📢 Opening Newsletter Modal...");
-        newsletterModal.style.display = "block";
+        newsletterModal.style.display = "flex";
+    }
+
+    // ✅ Ensure pop-ups never show again after signing up
+    if (hasSubscribed()) {
+        console.log("✅ User already subscribed. Hiding all pop-ups.");
+        if (newsletterModal) newsletterModal.style.display = "none";
+        if (learnMoreModal) learnMoreModal.style.display = "none";
+    } else {
+        showNewsletterModal();
     }
 
     // ✅ Attach event listeners to all navigation links
@@ -94,8 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             console.log("📩 User Subscribed via Modal:", email);
 
-            // ✅ Stop both pop-ups from appearing ever again
-            stopAllPopups();
+            // ✅ Save subscription status
+            localStorage.setItem("subscribed", "true");
 
             alert("✅ Thank you for subscribing, " + email + "!");
 
@@ -116,27 +119,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             console.log("📩 User Subscribed via Footer:", email);
 
-            // ✅ Stop both pop-ups from appearing ever again
-            stopAllPopups();
+            // ✅ Save subscription status
+            localStorage.setItem("subscribed", "true");
 
             alert("✅ Thank you for subscribing, " + email + "!");
         });
     }
-
-    // ✅ Fix: Show newsletter popup on homepage after 7 seconds (only if not subscribed)
-    if (!hasSubscribed()) {
-        console.log("⏳ User has NOT subscribed. Showing popup in 7 seconds...");
-        setTimeout(() => {
-            console.log("📢 Opening Newsletter Popup NOW");
-            newsletterModal.style.display = "block";
-        }, 7000);
-    } else {
-        console.log("✅ User already subscribed. Popup will NOT show again.");
-    }
 });
-
-
-
-
-
 
