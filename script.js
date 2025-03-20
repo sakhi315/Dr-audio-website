@@ -26,6 +26,12 @@ document.addEventListener("DOMContentLoaded", function () {
         return localStorage.getItem("aboutPopupClosed") === "true";
     }
 
+    // ✅ Ensure both pop-ups never show again after signing up
+    function stopAllPopups() {
+        localStorage.setItem("subscribed", "true"); // Stops newsletter pop-up
+        localStorage.setItem("aboutPopupClosed", "true"); // Stops About Dr. Audio pop-up
+    }
+
     // ✅ Function to force the newsletter popup until they subscribe
     function forceNewsletterPopup(event) {
         event.preventDefault(); // Prevent page navigation
@@ -77,9 +83,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         console.log("User Subscribed via Modal:", email);
 
-        // ✅ Save subscription status
-        localStorage.setItem("subscribed", "true");
-        localStorage.setItem("aboutPopupClosed", "true"); // ✅ Stop "About Dr. Audio" popup after signing up
+        // ✅ Stop both pop-ups from appearing ever again
+        stopAllPopups();
 
         alert("Thank you for subscribing, " + email + "!");
 
@@ -92,18 +97,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // ✅ Handle Newsletter Signup (Footer Form)
-    ctaNewsletterForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        let email = document.getElementById("cta-newsletter-email").value;
+    if (ctaNewsletterForm) {
+        ctaNewsletterForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            let email = document.getElementById("cta-newsletter-email").value;
 
-        console.log("User Subscribed via Footer:", email);
+            console.log("User Subscribed via Footer:", email);
 
-        // ✅ Save subscription status
-        localStorage.setItem("subscribed", "true");
-        localStorage.setItem("aboutPopupClosed", "true"); // ✅ Stop "About Dr. Audio" popup after signing up
+            // ✅ Stop both pop-ups from appearing ever again
+            stopAllPopups();
 
-        alert("Thank you for subscribing, " + email + "!");
-    });
+            alert("Thank you for subscribing, " + email + "!");
+        });
+    }
 
     // ✅ Fix: Show newsletter popup on homepage after 7 seconds (only if not subscribed)
     if (!hasSubscribed()) {
@@ -125,34 +131,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // ✅ Ensure "X" button closes the "About Dr. Audio" modal
-if (closeLearnMoreModal) {
-    closeLearnMoreModal.addEventListener("click", function (event) {
-        console.log("Closing Learn More Modal");
-        learnMoreModal.style.display = "none";
-        event.stopPropagation(); // ✅ Prevents any conflicts
+    if (closeLearnMoreModal) {
+        closeLearnMoreModal.addEventListener("click", function (event) {
+            console.log("Closing Learn More Modal");
+            learnMoreModal.style.display = "none";
+            event.stopPropagation(); // Prevents conflicts
 
-        // ✅ Save in localStorage so it won't appear again
-        localStorage.setItem("aboutPopupClosed", "true");
-    });
-}
-
-// ✅ Ensure clicking outside the modal closes it
-window.addEventListener("click", function (event) {
-    if (event.target === learnMoreModal) {
-        console.log("Clicked Outside, Closing Learn More Modal");
-        learnMoreModal.style.display = "none";
-
-        // ✅ Save in localStorage so it won't appear again
-        localStorage.setItem("aboutPopupClosed", "true");
+            // ✅ Save in localStorage so it won't appear again
+            localStorage.setItem("aboutPopupClosed", "true");
+        });
     }
-});
-
 
     // ✅ Ensure clicking outside the "About Dr. Audio" modal closes it
     window.addEventListener("click", function (event) {
         if (event.target === learnMoreModal) {
             console.log("Clicked Outside, Closing Learn More Modal");
             learnMoreModal.style.display = "none";
+
+            // ✅ Save in localStorage so it won't appear again
             localStorage.setItem("aboutPopupClosed", "true");
         }
     });
@@ -163,5 +159,6 @@ window.addEventListener("click", function (event) {
         learnMoreModal.style.display = "none";
     }
 });
+
 
 
